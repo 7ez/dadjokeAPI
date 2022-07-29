@@ -12,6 +12,7 @@ setuptools.setup(
     long_description=ldesc,
     long_description_content_type="text/markdown",
     url="https://github.com/7ez/dadjokeAPI",
+    install_requires=["aiohttp", "requests"],
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

@@ -10,7 +10,7 @@ from dadjokeAPI import getDadJoke
 print(getDadJoke("0189hNRf2g"))
 
 # Prints a list of dad jokes with a random or provided term.
-# Raises JokeNotFoundException if no jokes were found.
+# Returns a empty list if no jokes were found.
 print(searchDadJokes("fish"))
 ```
 
@@ -26,7 +26,7 @@ from dadjokeAPI import getDadJokeAsync
 print(await getDadJokeAsync("0189hNRf2g"))
 
 # Prints a list of dad jokes with a random or provided term.
-# Raises JokeNotFoundException if no jokes were found.
+# Returns a empty list if no jokes were found.
 # Has an optional aiohttp.ClientSession argument called http
 # in case you want to provide your session.
 print(await searchDadJokesAsync("fish"))
