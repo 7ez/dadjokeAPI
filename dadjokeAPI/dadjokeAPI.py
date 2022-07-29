@@ -59,8 +59,6 @@ async def searchDadJokesAsync(
     async with http.get("https://icanhazdadjoke.com/search", params={"term": query}, headers={"Accept": "text/plain"}) as resp:
         if resp.status == 429:
             raise RateLimitedException("Ratelimited for one minute.")
-        elif resp.status == 404:
-            raise JokeNotFoundException(resp.text)
         elif resp.status != 200:
             raise ServerErrorException(f"Server returned {resp.status}.\n\nServer response:{await resp.text()}")
 
