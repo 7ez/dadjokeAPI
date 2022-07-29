@@ -5,7 +5,7 @@ with open("README.md") as rmd:
 
 setuptools.setup(
     name="dadjokeAPI",
-    version="1.0.0",
+    version="1.0.1",
     author="Aochi",
     author_email="aochi@fuquila.net",
     description="A simple API wrapper for your dad joke needs.",
