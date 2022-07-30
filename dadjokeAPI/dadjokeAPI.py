@@ -4,8 +4,10 @@ import requests
 from typing import Optional
 from .exceptions import RateLimitedException, ServerErrorException, JokeNotFoundException
 
+HEADERS = {"Accept": "application/json"}
+
 def getDadJoke(joke_id: str = None) -> Optional[str]:
-    resp = requests.get(f"https://icanhazdadjoke.com/{f'j/{joke_id}' if joke_id is not None else ''}", headers={"Accept": "text/plain"})
+    resp = requests.get(f"https://icanhazdadjoke.com/{f'j/{joke_id}' if joke_id is not None else ''}", headers=HEADERS)
 
     if resp.status_code == 429:
         raise RateLimitedException("Ratelimited for one minute.")
@@ -19,7 +21,7 @@ def getDadJoke(joke_id: str = None) -> Optional[str]:
     return joke
 
 def searchDadJokes(query: str = "") -> Optional[list]:
-    resp = requests.get("https://icanhazdadjoke.com/search", {"term": query}, headers={"Accept": "application/json"})
+    resp = requests.get("https://icanhazdadjoke.com/search", {"term": query}, headers=HEADERS)
 
     if resp.status_code == 429:
         raise RateLimitedException("Ratelimited for one minute.")
@@ -37,7 +39,7 @@ async def getDadJokeAsync(
     if http is None:
         http = aiohttp.ClientSession()
 
-    async with http.get(f"https://icanhazdadjoke.com/{f'j/{joke_id}' if joke_id is not None else ''}", headers={"Accept": "application/json"}) as resp:
+    async with http.get(f"https://icanhazdadjoke.com/{f'j/{joke_id}' if joke_id is not None else ''}", headers=HEADERS) as resp:
         if resp.status == 429:
             raise RateLimitedException("Ratelimited for one minute.")
         elif resp.status == 404:
@@ -56,7 +58,7 @@ async def searchDadJokesAsync(
     if http is None:
         http = aiohttp.ClientSession()
 
-    async with http.get("https://icanhazdadjoke.com/search", params={"term": query}, headers={"Accept": "text/plain"}) as resp:
+    async with http.get("https://icanhazdadjoke.com/search", params={"term": query}, headers=HEADERS) as resp:
         if resp.status == 429:
             raise RateLimitedException("Ratelimited for one minute.")
         elif resp.status != 200:
